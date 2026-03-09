@@ -1,39 +1,31 @@
 package phattrienungdungvoij2ee.baitap4_qlsp.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import phattrienungdungvoij2ee.baitap4_qlsp.model.Category;
+import phattrienungdungvoij2ee.baitap4_qlsp.repository.CategoryRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CategoryService {
-    private List<Category> listCategory = new ArrayList<>();
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    public CategoryService() {
-        listCategory.add(new Category(1, "Điện thoại"));
-        listCategory.add(new Category(2, "Máy tính xách tay"));
-        listCategory.add(new Category(3, "Phụ kiện"));
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
     }
 
-    public List<Category> getAll() {
-        return listCategory;
+    public void saveCategory(Category category) {
+        categoryRepository.save(category);
     }
 
-    public Category get(int id) {
-        return listCategory.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
+    public Category getCategoryById(Integer id) {
+        return categoryRepository.findById(id).orElse(null);
     }
 
-    public void add(Category newCategory) {
-        int maxId = listCategory.stream().mapToInt(Category::getId).max().orElse(0);
-        newCategory.setId(maxId + 1);
-        listCategory.add(newCategory);
-    }
-
-    public void update(Category editCategory) {
-        Category find = get(editCategory.getId());
-        if (find != null) {
-            find.setName(editCategory.getName());
-        }
+    public void deleteCategory(Integer id) {
+        categoryRepository.deleteById(id);
     }
 }

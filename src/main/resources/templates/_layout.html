@@ -1,5 +1,5 @@
-<html lang="en"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,21 +11,23 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
-    <div style="padding-left: 40px">
-        <a class="navbar-brand" th:href="@{/products}">Home</a>
-        <a class="navbar-brand" th:href="@{/products/create}">Products</a>
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <div style="padding-left: 40px">
+            <a class="navbar-brand" th:href="@{/products}">Home</a>
+            <a class="navbar-brand" th:href="@{/products/create}">Products</a>
+        </div>
+        <form class="d-flex" role="search" th:action="@{/home/search}" th:method="get">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
     </div>
-    <form class="d-flex" role="search" th:action="@{/home/search}" th:method="get">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
 </nav>
 
-<div layout:fragment="content" class="container body-content">
+<div layout:fragment="content" class="container body-content mt-4">
 </div>
 
-<div class="card-footer text-center">
+<div class="card-footer text-center mt-4">
     <hr/>
     <p>&copy; 2025 - Phát triển ứng dụng với J2EE</p>
 </div>
